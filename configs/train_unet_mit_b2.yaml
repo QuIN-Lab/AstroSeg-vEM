@@ -1,0 +1,28 @@
+# configs/train_unet_mit_b2.yaml
+experiment_name: "unet_mit_b2"
+
+model:
+  arch_type: "unet"
+  encoder_name: "mit_b2"
+  pretrained_path: null
+  patch_size: 224
+
+data:
+  train_patch_roots:
+    - "./data/patches/dataset_1_mutant_patches_224"
+    - "./data/patches/dataset_2_ctrl_patches_224"
+    - "./data/patches/dataset_3_ctrl_patches_224"
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+  pre_zscore: false
+
+training:
+  batch_size: 64
+  lr: 0.00006
+  num_epochs: 50
+  patience: 5
+  device: "cuda"
+  seed: 2025
+  checkpoint_dir: "./checkpoints"
+  offline: false
+  dice_mode: "batch"  # "per_sample" or "batch"
